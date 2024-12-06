@@ -7,19 +7,24 @@ def validate_report(report):
         
     return True
 
-with open('./2025/day2/input.txt', 'r') as file:
+with open('./2024/day2/input.txt', 'r') as file:
     reports = file.readlines()
     
 safe = 0
+safe_with_dampener = 0
+
 for line in reports:
     report = [int(level) for level in line.strip().split(' ')]
+    if validate_report(report): safe += 1
     
     for i in range(len(report)):
         copied_report = report.copy()
         copied_report.pop(i)
         
         if validate_report(copied_report):
-            safe += 1
+            safe_with_dampener += 1
             break
     
-print(safe)
+    
+print("Answer without dampener (part 1):", safe)
+print("Answer with dampener (part 2):", safe_with_dampener)

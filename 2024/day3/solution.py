@@ -9,11 +9,13 @@ def exec_instruction(instruction):
     except:
         return 0
     
-with open('./2025/day3/input.txt', 'r') as file:
+with open('./2024/day3/input.txt', 'r') as file:
     memory = ''.join(file.readlines())
 
 total = 0
+total_with_exec_toggling = 0
 exec_enabled = True
+
 while len(memory) > 0:
     if memory.startswith("do()"):
         exec_enabled = True
@@ -24,7 +26,7 @@ while len(memory) > 0:
         exec_enabled = False
         memory = memory[7:]
         continue
-        
+    
     if not memory.startswith("mul("):
         memory = memory[1:]
         continue
@@ -32,7 +34,12 @@ while len(memory) > 0:
     end_index = memory.find(')')
     if end_index == -1: break
     
-    if exec_enabled: total += exec_instruction(memory[:end_index + 1])
+    result = exec_instruction(memory[:end_index + 1])
+    
+    total += result
+    if exec_enabled: total_with_exec_toggling += result
+    
     memory = memory[5:]
     
-print(total)
+print("Answer to part 1:", total)
+print("Answer to part 2:", total_with_exec_toggling)
