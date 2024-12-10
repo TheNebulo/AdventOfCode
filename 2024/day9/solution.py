@@ -34,4 +34,5 @@ while len(disk_map_without_space) > 0:
     expanded_disk_map.pop(0)
     pos += 1
         
-print(checksum)
+print("Answer to part 1:", checksum)
+print("Answer to part 2: NOT READY YET") # I really can't figure this one out rn haha
